@@ -4,6 +4,7 @@ dependencies:
   '@testing-library/user-event': 13.5.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-icons: 4.4.0_react@18.2.0
   react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
   react-scripts: 5.0.1_react@18.2.0
   web-vitals: 2.1.4
@@ -8425,6 +8426,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
+  /react-icons/4.4.0_react@18.2.0:
+    dependencies:
+      react: 18.2.0
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
   /react-is/16.13.1:
     dev: false
     resolution:
@@ -10344,6 +10353,7 @@ specifiers:
   '@testing-library/user-event': ^13.5.0
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-icons: ^4.4.0
   react-router-dom: ^6.3.0
   react-scripts: 5.0.1
   web-vitals: ^2.1.4
