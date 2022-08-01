@@ -2,11 +2,13 @@ dependencies:
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.3.0_react-dom@18.2.0+react@18.2.0
   '@testing-library/user-event': 13.5.0
+  js-cookie: 3.0.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.4.0_react@18.2.0
   react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
   react-scripts: 5.0.1_react@18.2.0
+  react-toastify: 9.0.7_react-dom@18.2.0+react@18.2.0
   web-vitals: 2.1.4
 lockfileVersion: 5.2
 packages:
@@ -3557,6 +3559,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==
+  /clsx/1.2.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
   /co/4.6.0:
     dev: false
     engines:
@@ -6481,6 +6489,12 @@ packages:
         optional: true
     resolution:
       integrity: sha512-Yn0mADZB89zTtjkPJEXwrac3LHudkQMR+Paqa8uxJHCBr9agxztUifWCyiYrjhMPBoUVBjyny0I7XH6ozDr7QQ==
+  /js-cookie/3.0.1:
+    dev: false
+    engines:
+      node: '>=12'
+    resolution:
+      integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
   /js-tokens/4.0.0:
     dev: false
     resolution:
@@ -8537,6 +8551,17 @@ packages:
         optional: true
     resolution:
       integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==
+  /react-toastify/9.0.7_react-dom@18.2.0+react@18.2.0:
+    dependencies:
+      clsx: 1.2.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    resolution:
+      integrity: sha512-UG5P/2F/fYdbK+v3XRWHM6xfMkWeLM+k2swKvwU8oO9DXx31GkeoH7Z6slBTkavZ0VjoQ+n/YD6xOBqEwN7HRg==
   /react/18.2.0:
     dependencies:
       loose-envify: 1.4.0
@@ -10351,9 +10376,11 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.4
   '@testing-library/react': ^13.3.0
   '@testing-library/user-event': ^13.5.0
+  js-cookie: ^3.0.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-icons: ^4.4.0
   react-router-dom: ^6.3.0
   react-scripts: 5.0.1
+  react-toastify: ^9.0.7
   web-vitals: ^2.1.4

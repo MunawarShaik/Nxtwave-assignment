@@ -92,9 +92,6 @@ class Home extends Component {
     const { activeTabId, resourcesList } = this.state;
     const searchResults = this.getSearchResults();
     const isHome = true;
-    // const filteredResources = searchResults.filter(
-    //   (each) => each.tag === activeTabId.toLocaleLowerCase()
-    // );
     console.log(resourcesList);
     return (
       <MainContainer>

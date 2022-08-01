@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.nav`
-  height: 30px;
+  height: 34px;
   width: 1240px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px;
+  padding-top: 20px;
   border-radius: 0px;
   background: #ffffff;
   border-bottom: 1px solid #d7dfe9;
@@ -15,6 +16,7 @@ export const HeaderContainer = styled.nav`
 export const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 `;
 
@@ -34,8 +36,9 @@ export const LogoImg = styled.img.attrs((props) => ({
 
 export const Button = styled.button`
   background-color: #0b69ff;
-  align-self: auto;
+  align-self: center;
   border-radius: 4px;
+  margin-top: 10px;
   color: white;
   height: 40px;
   border: none;
@@ -48,12 +51,19 @@ export const Button = styled.button`
 export const ProfileImg = styled.img.attrs((props) => ({
   src: props.src,
 }))`
-  height: 40px;
-  align-self: auto;
-  margin-left: 10px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  @media (max-width: 576px) {
-    width: 100px;
-    height: 30px;
-  }
+`;
+
+export const ProfileButton = styled.button`
+  height: 60px;
+  background-color: transparent;
+  width: 60px;
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  border: none;
+  outline: none;
 `;
