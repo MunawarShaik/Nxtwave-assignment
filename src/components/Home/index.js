@@ -3,12 +3,18 @@ import { Component } from "react";
 import { BsSearch } from "react-icons/bs";
 import TabItem from "../TabItem";
 import CardItem from "../CardItem";
+import { TailSpin } from "react-loader-spinner";
+import "./index.css";
 import {
   MainContainer,
   TabsList,
   InputEl,
   InputContainer,
   CardsContainer,
+  LoaderContainer,
+  FailureView,
+  FailureHeading,
+  FailurePara,
   InputAndCardContainer,
 } from "./styledComponents";
 import Header from "../Header";
@@ -89,7 +95,7 @@ class Home extends Component {
   };
 
   render() {
-    const { activeTabId, resourcesList } = this.state;
+    const { activeTabId, resourcesList, apiStatus } = this.state;
     const searchResults = this.getSearchResults();
     const isHome = true;
     console.log(resourcesList);
@@ -116,11 +122,32 @@ class Home extends Component {
             />
           </InputContainer>
 
-          <CardsContainer>
-            {searchResults.map((each) => (
-              <CardItem details={each} key={each.id} />
-            ))}
-          </CardsContainer>
+          {apiStatus === apiStatusConstants.inProgress ? (
+            <LoaderContainer>
+              <TailSpin />
+            </LoaderContainer>
+          ) : null}
+          {apiStatus === apiStatusConstants.success ? (
+            <CardsContainer>
+              {searchResults.map((each) => (
+                <CardItem details={each} key={each.id} />
+              ))}
+            </CardsContainer>
+          ) : null}
+          {apiStatus === apiStatusConstants.failure ? (
+            <FailureView>
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
+                alt="failure-error"
+                className="failure-img"
+              />
+              <FailureHeading>Oops! Something Went Wrong</FailureHeading>
+              <FailurePara>
+                We are having some trouble processing your request. Please try
+                again.
+              </FailurePara>
+            </FailureView>
+          ) : null}
         </InputAndCardContainer>
       </MainContainer>
     );
