@@ -1,0 +1,11 @@
+.failure-img {
+  width: 250px;
+  height: 200px;
+}
+
+@media screen and (min-width: 768px) {
+  .failure-img {
+    width: 400px;
+    height: 350px;
+  }
+}

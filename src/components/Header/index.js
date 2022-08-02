@@ -14,7 +14,7 @@ import {
 const Header = (props) => {
   const { isHome } = props;
   const RemoveUser = () => {
-    console.log("button Clicked");
+    // console.log("button Clicked");
     const { history } = props;
     Cookies.remove("jwt_token");
     history.replace("/login");

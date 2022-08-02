@@ -27,6 +27,7 @@ class LoginForm extends Component {
 
   OnSubmitForm = async (e) => {
     e.preventDefault();
+
     const { username, password } = this.state;
     const UserDetails = { username, password };
     const options = { method: "POST", body: JSON.stringify(UserDetails) };
@@ -34,6 +35,7 @@ class LoginForm extends Component {
     const data = await response.json();
     if (response.ok) {
       const { history } = this.props;
+      console.log(history);
       Cookies.set("jwt_token", data.jwt_token, { expires: 30 });
       history.replace("/");
     } else {

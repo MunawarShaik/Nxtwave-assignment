@@ -36,6 +36,8 @@ class AddResource extends Component {
     link:
       "https://res.cloudinary.com/deodlm2m0/image/upload/v1659265463/image_9_q9jvp4.png",
     description: "",
+    nameError: "",
+    linkError: "",
   };
 
   showToast = () => {
@@ -56,28 +58,56 @@ class AddResource extends Component {
     this.setState({ description: event.target.value });
   };
 
+  validate = () => {
+    let nameError = "";
+    let linkError = "";
+    if (!this.state.username) {
+      nameError = "name cannot be blank";
+    }
+
+    if (!this.state.link.includes(".png")) {
+      linkError = "invalid link";
+    }
+
+    if (linkError || nameError) {
+      this.setState({ linkError, nameError });
+      return false;
+    }
+
+    return true;
+  };
+
   OnSubmitForm = async (e) => {
     e.preventDefault();
-
-    const { username, link, description } = this.state;
-    const UserDetails = { username, link, description };
-    const options = { method: "POST", body: JSON.stringify(UserDetails) };
-    const response = await toast.promise(
-      fetch(
-        " https://media-content.ccbp.in/website/react-assignment/add_resource.json",
-        options
-      ),
-      {
-        pending: "Promise is pending",
-        success: "Promise resolved 👌",
-        error: "Promise rejected 🤯",
-      }
-    );
-    console.log(response);
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state);
+      // clear form
+      const { username, link, description } = this.state;
+      const UserDetails = { username, link, description };
+      const options = {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(UserDetails),
+      };
+      const response = await toast.promise(
+        fetch(
+          " https://media-content.ccbp.in/website/react-assignment/add_resource.json",
+          options
+        ),
+        {
+          pending: "Promise is pending",
+          success: "Promise resolved 👌",
+          error: "Promise rejected 🤯",
+        }
+      );
+      console.log(response);
+      // this.setState(initialState);
+    }
   };
 
   render() {
-    const { username, link, description } = this.state;
+    const { username, link, description, linkError, nameError } = this.state;
     const isHome = false;
     return (
       <MainContainer>
@@ -104,6 +134,7 @@ class AddResource extends Component {
                   placeholder="Name"
                 />
               </InputContainer>
+              {nameError && <p style={{ color: "red" }}> {nameError}</p>}
               <LabelEl htmlFor="link">Link</LabelEl>
               <InputContainer>
                 <InputEl
@@ -114,6 +145,7 @@ class AddResource extends Component {
                   placeholder="Link"
                 />
               </InputContainer>
+              {linkError && <p> {linkError}</p>}
               <LabelEl htmlFor="description">Description</LabelEl>
               <InputContainer>
                 <TextArea
@@ -138,7 +170,7 @@ class AddResource extends Component {
           </DetailsContainer>
 
           <ImageContainer>
-            <PreviewImage src={link} />
+            <PreviewImage src={link} alt="uploaded image" />
           </ImageContainer>
         </InnerContainer>
         <ToastContainer position="bottom-center" />

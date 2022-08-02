@@ -1,22 +1,31 @@
 import React from "react";
 import { Component } from "react";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
+
 import { BsSearch } from "react-icons/bs";
 import TabItem from "../TabItem";
 import CardItem from "../CardItem";
+import { TailSpin } from "react-loader-spinner";
+import "./index.css";
 import {
   MainContainer,
   TabsList,
   InputEl,
   InputContainer,
   CardsContainer,
+  LoaderContainer,
+  FailureView,
+  FailureHeading,
+  FailurePara,
   InputAndCardContainer,
 } from "./styledComponents";
 import Header from "../Header";
 
 const tabsList = [
-  { tabId: "RESOURCES", displayText: "Resources" },
-  { tabId: "REQUESTS", displayText: "Requests" },
-  { tabId: "USERS", displayText: "Users" },
+  { tabId: "resources", displayText: "Resources" },
+  { tabId: "requests", displayText: "Requests" },
+  { tabId: "users", displayText: "Users" },
 ];
 
 const apiStatusConstants = {
@@ -51,6 +60,7 @@ class Home extends Component {
     const response = await fetch(apiUrl, options);
     if (response.ok) {
       const fetchedData = await response.json();
+      // console.log(fetchedData);
       const updatedData = fetchedData.map((item) => ({
         category: item.category,
         description: item.description,
@@ -89,10 +99,16 @@ class Home extends Component {
   };
 
   render() {
-    const { activeTabId, resourcesList } = this.state;
+    const { activeTabId, apiStatus } = this.state;
     const searchResults = this.getSearchResults();
+
     const isHome = true;
-    console.log(resourcesList);
+
+    const jwtToken = Cookies.get("jwt_token");
+    if (jwtToken === undefined) {
+      return <Navigate to="/login" />;
+    }
+
     return (
       <MainContainer>
         <Header isHome={isHome} />
@@ -116,11 +132,32 @@ class Home extends Component {
             />
           </InputContainer>
 
-          <CardsContainer>
-            {searchResults.map((each) => (
-              <CardItem details={each} key={each.id} />
-            ))}
-          </CardsContainer>
+          {apiStatus === apiStatusConstants.inProgress ? (
+            <LoaderContainer>
+              <TailSpin />
+            </LoaderContainer>
+          ) : null}
+          {apiStatus === apiStatusConstants.success ? (
+            <CardsContainer>
+              {searchResults.map((each) => (
+                <CardItem details={each} key={each.id} />
+              ))}
+            </CardsContainer>
+          ) : null}
+          {apiStatus === apiStatusConstants.failure ? (
+            <FailureView>
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
+                alt="failure-error"
+                className="failure-img"
+              />
+              <FailureHeading>Oops! Something Went Wrong</FailureHeading>
+              <FailurePara>
+                We are having some trouble processing your request. Please try
+                again.
+              </FailurePara>
+            </FailureView>
+          ) : null}
         </InputAndCardContainer>
       </MainContainer>
     );

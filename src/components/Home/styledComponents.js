@@ -59,3 +59,33 @@ export const CardsContainer = styled.div`
   align-items: flex-start;
   margin-top: 20px;
 `;
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const FailureView = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  padding-bottom: 64px;
+`;
+
+export const FailureHeading = styled.div`
+  color: #171f46;
+  font-family: "Roboto";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+`;
+export const FailurePara = styled.div`
+  text-align: center;
+  color: #64748b;
+  font-family: "Roboto";
+  font-size: 14px;
+  width: 90%;
+  max-width: 288px;
+  line-height: 1.3;
+`;
