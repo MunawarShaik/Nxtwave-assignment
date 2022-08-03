@@ -21,6 +21,7 @@ import {
   InputAndCardContainer,
 } from "./styledComponents";
 import Header from "../Header";
+import Pagination from "../Pagination";
 
 const tabsList = [
   { tabId: "resources", displayText: "Resources" },
@@ -41,6 +42,7 @@ class Home extends Component {
     apiStatus: apiStatusConstants.initial,
     searchInput: "",
     activeTabId: tabsList[0].tabId,
+    perPage: [],
   };
 
   componentDidMount() {
@@ -69,9 +71,12 @@ class Home extends Component {
         tag: item.tag,
         title: item.title,
       }));
+      const setPage = updatedData.slice(0, 9);
       // console.log(updatedData);
+      console.log(setPage);
       this.setState({
         resourcesList: updatedData,
+        perPage: setPage,
         apiStatus: apiStatusConstants.success,
       });
     } else {
@@ -90,8 +95,8 @@ class Home extends Component {
   };
 
   getSearchResults = () => {
-    const { searchInput, resourcesList } = this.state;
-    const searchResults = resourcesList.filter((each) =>
+    const { searchInput, perPage } = this.state;
+    const searchResults = perPage.filter((each) =>
       each.title.toLowerCase().includes(searchInput.toLowerCase())
     );
     return searchResults;
@@ -111,8 +116,16 @@ class Home extends Component {
     return filteredResources;
   };
 
+  pageHandler = (pageNumber) => {
+    const { resourcesList } = this.state;
+    const updated = resourcesList.slice(pageNumber * 9 - 9, pageNumber * 9);
+    this.setState({
+      perPage: updated,
+    });
+  };
+
   render() {
-    const { activeTabId, apiStatus } = this.state;
+    const { activeTabId, resourcesList, apiStatus } = this.state;
     const searchResults = this.getSearchResults();
     const filteredResources = this.getActiveTabResources(searchResults);
     const isHome = true;
@@ -170,6 +183,7 @@ class Home extends Component {
             </FailureView>
           ) : null}
         </InputAndCardContainer>
+        <Pagination data={resourcesList} pageHandler={this.pageHandler} />
       </MainContainer>
     );
   }
