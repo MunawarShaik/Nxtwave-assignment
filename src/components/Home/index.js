@@ -24,8 +24,8 @@ import Header from "../Header";
 
 const tabsList = [
   { tabId: "resources", displayText: "Resources" },
-  { tabId: "requests", displayText: "Requests" },
-  { tabId: "users", displayText: "Users" },
+  { tabId: "request", displayText: "Requests" },
+  { tabId: "user", displayText: "Users" },
 ];
 
 const apiStatusConstants = {
@@ -97,21 +97,29 @@ class Home extends Component {
     return searchResults;
   };
 
-  render() {
-    const { activeTabId, resourcesList, apiStatus } = this.state;
-    const searchResults = this.getSearchResults();
-    const isHome = true;
-    const filteredData = resourcesList.filter((each) => {
-      console.log("this is each tag ", each.tag);
-      console.log("this is active tab", activeTabId);
-      return each.tag === activeTabId;
+  getActiveTabResources = (searchedResources) => {
+    const { activeTabId } = this.state;
+    const filteredResources = searchedResources.filter((each) => {
+      if (activeTabId === "user") {
+        return each.tag === "user";
+      } else if (activeTabId === "request") {
+        return each.tag === "request";
+      } else {
+        return each;
+      }
     });
-    console.log(filteredData);
+    return filteredResources;
+  };
+
+  render() {
+    const { activeTabId, apiStatus } = this.state;
+    const searchResults = this.getSearchResults();
+    const filteredResources = this.getActiveTabResources(searchResults);
+    const isHome = true;
     const jwtToken = Cookies.get("jwt_token");
     if (jwtToken === undefined) {
       return <Navigate to="/login" />;
     }
-
     return (
       <MainContainer>
         <Header isHome={isHome} />
@@ -142,7 +150,7 @@ class Home extends Component {
           ) : null}
           {apiStatus === apiStatusConstants.success ? (
             <CardsContainer>
-              {searchResults.map((each) => (
+              {filteredResources.map((each) => (
                 <CardItem details={each} key={each.id} />
               ))}
             </CardsContainer>

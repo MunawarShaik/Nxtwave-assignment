@@ -55,7 +55,7 @@ export const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-top: 20px;
 `;

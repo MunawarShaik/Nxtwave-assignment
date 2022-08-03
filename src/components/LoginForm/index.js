@@ -34,9 +34,9 @@ class LoginForm extends Component {
     const data = await response.json();
     if (response.ok) {
       Cookies.set("jwt_token", data.jwt_token, { expires: 30 });
-      toast("Login Success", {
-        position: "top-center",
-      });
+      // toast("Login Success", {
+      //   position: "top-center",
+      // });
       <Navigate to="/" />;
     } else {
       this.setState((prevState) => ({
@@ -60,11 +60,18 @@ class LoginForm extends Component {
     }));
   };
 
-  //   showToast = () => {
-  //     toast("Login Success", {
-  //       position: "top-center",
-  //     });
-  //   };
+  showToast = () => {
+    const { isLoginFailed } = this.state;
+    if (!isLoginFailed) {
+      toast.error("Login Failed", {
+        position: "top-center",
+      });
+    } else {
+      toast("Login Success", {
+        position: "top-center",
+      });
+    }
+  };
 
   render() {
     const {
@@ -110,12 +117,14 @@ class LoginForm extends Component {
               margin-right="8px"
               outline="none"
             />
-
             <LabelItem htmlFor="CheckBox" MaiCheckboxHU>
               Show Password
             </LabelItem>
           </CheckBoxContainer>
-          <LoginBtn type="submit">Login</LoginBtn>
+
+          <LoginBtn type="submit" onClick={this.showToast}>
+            Login
+          </LoginBtn>
           {isLoginFailed ? <Notice>*{ErrorMsg}</Notice> : null}
         </FormContainer>
         <ToastContainer autoClose={1000} />
