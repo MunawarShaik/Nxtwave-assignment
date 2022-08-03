@@ -51,7 +51,6 @@ class Home extends Component {
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     });
-    // const { activeTabId, searchInput } = this.state;
     const apiUrl =
       "https://media-content.ccbp.in/website/react-assignment/resources.json";
     const options = {
@@ -99,11 +98,15 @@ class Home extends Component {
   };
 
   render() {
-    const { activeTabId, apiStatus } = this.state;
+    const { activeTabId, resourcesList, apiStatus } = this.state;
     const searchResults = this.getSearchResults();
-
     const isHome = true;
-
+    const filteredData = resourcesList.filter((each) => {
+      console.log("this is each tag ", each.tag);
+      console.log("this is active tab", activeTabId);
+      return each.tag === activeTabId;
+    });
+    console.log(filteredData);
     const jwtToken = Cookies.get("jwt_token");
     if (jwtToken === undefined) {
       return <Navigate to="/login" />;

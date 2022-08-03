@@ -27,17 +27,17 @@ class LoginForm extends Component {
 
   OnSubmitForm = async (e) => {
     e.preventDefault();
-
     const { username, password } = this.state;
     const UserDetails = { username, password };
     const options = { method: "POST", body: JSON.stringify(UserDetails) };
     const response = await fetch("https://apis.ccbp.in/login", options);
     const data = await response.json();
     if (response.ok) {
-      const { history } = this.props;
-      console.log(history);
       Cookies.set("jwt_token", data.jwt_token, { expires: 30 });
-      history.replace("/");
+      toast("Login Success", {
+        position: "top-center",
+      });
+      <Navigate to="/" />;
     } else {
       this.setState((prevState) => ({
         isLoginFailed: !prevState.isLoginFailed,
@@ -60,11 +60,11 @@ class LoginForm extends Component {
     }));
   };
 
-  showToast = () => {
-    toast("Login Success", {
-      position: "top-center",
-    });
-  };
+  //   showToast = () => {
+  //     toast("Login Success", {
+  //       position: "top-center",
+  //     });
+  //   };
 
   render() {
     const {
@@ -115,12 +115,10 @@ class LoginForm extends Component {
               Show Password
             </LabelItem>
           </CheckBoxContainer>
-          <LoginBtn type="submit" onClick={this.showToast}>
-            Login
-          </LoginBtn>
+          <LoginBtn type="submit">Login</LoginBtn>
           {isLoginFailed ? <Notice>*{ErrorMsg}</Notice> : null}
         </FormContainer>
-        <ToastContainer autoClose={3000} />
+        <ToastContainer autoClose={1000} />
       </MainFormContainer>
     );
   }

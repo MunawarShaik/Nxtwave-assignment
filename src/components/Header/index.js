@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   HeaderContainer,
@@ -14,10 +14,8 @@ import {
 const Header = (props) => {
   const { isHome } = props;
   const RemoveUser = () => {
-    // console.log("button Clicked");
-    const { history } = props;
     Cookies.remove("jwt_token");
-    history.replace("/login");
+    <Navigate to="/login" />;
   };
 
   return (
@@ -35,13 +33,6 @@ const Header = (props) => {
               <Button type="button">+ ADD</Button>
             </Link>
           ) : null}
-          {/* {isHome ? (
-            <Link to="/login">
-              <Button type="button" onClick={RemoveUser}>
-                Logout
-              </Button>
-            </Link>
-          ) : null} */}
           <Link to="/login">
             <ProfileImg
               onClick={RemoveUser}
