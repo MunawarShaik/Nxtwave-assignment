@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  // background-color: blue;
+  //background-color: blue;
   height: 100%;
   width: 1280px;
 `;
@@ -21,10 +21,10 @@ export const InputAndCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
+  min-height: 90vh;
   width: 80%;
   margin-left: 40px;
-  // background-color: orange;
+  //background-color: orange;
   margin-right: 40px;
 `;
 
@@ -55,6 +55,7 @@ export const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  min-height: 100%;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 20px;
